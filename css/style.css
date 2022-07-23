@@ -1,0 +1,70 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  margin: 0 auto;
+}
+
+html {
+  background-color: #def;
+}
+
+#user {
+  padding: 1rem 2rem;
+  text-align: right;
+  font: 1.5rem "Roboto", sans-serif;
+  text-shadow: -1px 0.5px 0.5px #fffb00, 1px -0.5px 1px #0059ff,
+    -2px 2px 1px #757575;
+  font-weight: 600;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 3% auto;
+  width: 50%;
+  padding: 2rem 0;
+  border: #0059ff33 solid 2px;
+  border-radius: 10px;
+}
+
+form > div {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 1rem;
+  align-items: baseline;
+}
+
+form> div > * {
+  margin: 1rem auto;
+  font: 1.5vw sans-serif;
+}
+
+form> div > div > *{
+  margin: 1rem auto;
+  font: 1.5vw sans-serif;
+}
+
+.btn {
+  background-color: #00bfaa;
+  border: none;
+  color: #fff;
+  padding: 10px 20px;
+  margin: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font: 1.5vw sans-serif;
+}
+
+#btn-add {
+  background-color: #00bfaa;
+  border: none;
+  color: #fff;
+  padding: 7px 10px;
+  margin: .5rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font: bold 1vw sans-serif;
+}
