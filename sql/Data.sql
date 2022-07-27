@@ -14,4 +14,5 @@ create table token(
     id_user int not null,
     foreign key (id_user) references users(id));
 
+
 insert into `users` (`username`, `email`, `pass`) values ('qwerty', 'qwerty@gmail.com', '321654');
