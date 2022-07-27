@@ -2,7 +2,7 @@
 session_start();
 if (isset($_POST)) {
   if ($_SESSION['login']) {
-    echo '<h2 id="user" data-id="' . $_SESSION['idusuario'] . '">' . $_SESSION['usuario'] . '</h2>';
+    echo '<h2 class="info" id="user" data-id="' . $_SESSION['idusuario'] . '" data-email="' . $_SESSION['email'] . '">' . $_SESSION['usuario'] . '</h2>';
   } else {
     header('Location: Login.php');
     exit();
@@ -29,7 +29,7 @@ if (isset($_POST)) {
   <form action="NewKey.php" method="post">
     <div class="fila">
       <label for="clave">Clave: </label>
-      <input type='text' name='clave' id='clave' required>
+      <input type='text' name='key' id='key' pattern="\d*" maxlength="4" required>
       <input type='hidden' name='fecha' id='fecha'>
       <input type='hidden' name='user' id='user'>
     </div>
@@ -47,8 +47,10 @@ if (isset($_POST)) {
         <input type="text" name="email" id="email" style="width: 80%;">
         <input type="button" value="+" id='btn-add'>
         <input type="hidden" name="emails" id="emails">
+        <input type="hidden" name="clave" id="clave">
       </div>
     </div>
+
     <input type="submit" id='subkey' value="Aceptar" class='btn'>
   </form>
   <script src="js/Keys.js"></script>

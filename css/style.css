@@ -9,7 +9,7 @@ html {
   background-color: #def;
 }
 
-#user {
+.info {
   padding: 1rem 2rem;
   text-align: right;
   font: 1.5rem "Roboto", sans-serif;
@@ -67,4 +67,19 @@ form> div > div > *{
   border-radius: 5px;
   cursor: pointer;
   font: bold 1vw sans-serif;
+}
+
+#btn-ver {
+  background-color: #00bfaa;
+  border: none;
+  color: #fff;
+  margin-left: .4rem;
+  padding: .6vw .5rem;
+  border-radius: 3px;
+  cursor: pointer;
+  font: bold 1vw sans-serif;
+}
+
+.input-error {
+  border: 1px solid #ff0000;
 }

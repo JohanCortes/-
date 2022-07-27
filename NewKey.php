@@ -1,6 +1,14 @@
 <?php
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\SMTP;
+require 'PHPMailer-6.6.3/src/Exception.php';
+require 'PHPMailer-6.6.3/src/PHPMailer.php';
+require 'PHPMailer-6.6.3/src/SMTP.php';
+$mail = new PHPMailer(true);
 $id = $_POST['user'];
 $clave = $_POST['clave'];
+$key = $_POST['key'];
 $fecha = $_POST['fecha'];
 $duracion = $_POST['hh'] . ':' . $_POST['mm'] . ':' . $_POST['ss'];
 $emails = $_POST['emails'];
@@ -9,14 +17,32 @@ try {
   $PDO = new PDO('mysql:host=localhost;dbname=Data', 'root', '');
   $result = $PDO->prepare("insert into `token` (val, fecha, duracion, id_user) values (:clave, :fecha, :duracion, :id)");
   $result->execute(array(':clave' => $clave, ':fecha' => $fecha, ':duracion' => $duracion, ':id' => $id));
+  echo 'Clave creada correctamente';
 
   $emails=explode(';', $emails);
-  foreach($emails as $email) {
-    echo mail($email,'Token','<h1 style="color:red;">'.$clave.'</h1>',"MIME-Version: 1.0\r\nContent-type:text/html;charset=UTF-8\r\nFrom: <no-reply@gmail.com>");
+  //$mail->SMTPDebug = SMTP::DEBUG_SERVER;
+  $mail->isSMTP();                                      // Set mailer to use SMTP
+  $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
+  $mail->SMTPAuth = true;                               // Enable SMTP authentication
+  $mail->Username = 'asistenteelectronico2@gmail.com';                 // SMTP username
+  $mail->Password = 'rscyqanejbofuqzw';                           // SMTP password
+  $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+  $mail->Port = 587;                                    // TCP port to connect to
+  $mail->setFrom('asistenteelectronico2@gmail.com', 'Set key');
+  $mail->isHTML(true);                                  // Set email format to HTML
+  $mail->Subject = 'Key';
+  $mail->Body    = '<h1>Clave de acceso</h1>
+  <p>La clave para el acceso a la aplicación es: ' . $key . '</p>
+  <p>La clave tendrá validez durante ' . $duracion . '</p>';
+  //$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+  foreach ($emails as $email) {
+    $mail->addAddress($email);
   }
-
-  echo 'Clave creada correctamente';
+  $mail->send();
+  echo 'Message has been sent';
 } catch (PDOException $e) {
   echo "Error: " . $e->getMessage();
+} catch (Exception $e) {
+  echo "Error: " . $e->getMessage();
 }
-print_r($emails);
+//print_r($emails);

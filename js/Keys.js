@@ -1,15 +1,17 @@
 document.addEventListener("submit", (e) => {
   e.preventDefault();
-  e.target.clave.value = CryptoJS.SHA256(e.target.clave.value).toString();
+  e.target.clave.value = CryptoJS.SHA256(e.target.key.value).toString();
   e.target.fecha.value = new Date()
     .toISOString()
     .replace("T", " ")
     .replace("Z", "");
   e.target.user.value = document.getElementById("user").dataset.id;
-  console.log(e.target.clave.value, e.target.fecha.value);
+  e.target.emails.value += document.getElementById("user").dataset.email;
+  let data = new FormData(e.target);
+  console.log(data);
   fetch(e.target.action, {
     method: "POST",
-    body: new FormData(e.target),
+    body: data,
   })
     .then((res) => res.text())
     .then((text) => {
@@ -26,8 +28,15 @@ document.addEventListener("submit", (e) => {
 document.addEventListener("click", (e) => {
   if (e.target.matches("#btn-add")) {
     let $prev = e.target.previousElementSibling,
-      $next = e.target.nextElementSibling;
-    $prev.value && ($next.value += $prev.value + ";");
+      $next = e.target.nextElementSibling,
+      reg = new RegExp(
+        "^[a-z0-9]+(\\.[_a-z0-9]+)*@[a-z0-9-]+(\\.[a-z0-9-]+)*(\\.[a-z]{2,15})$"
+      );
+    $prev.value && reg.test($prev.value) && ($next.value += $prev.value + ";");
     $prev.value = "";
   }
+});
+
+document.getElementById("user").addEventListener("dblclick", (e) => {
+  window.open("logout.php", "_self");
 });

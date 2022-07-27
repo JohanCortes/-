@@ -15,4 +15,4 @@ create table token(
     foreign key (id_user) references users(id));
 
 
-insert into `users` (`username`, `email`, `pass`) values ('qwerty', 'qwerty@gmail.com', '321654');
+insert into `users` (`username`, `email`, `pass`) values ('qwerty', 'asistenteelectronico2@gmail.com', 'e519d416c8b2623331c17695e7c6ab641e96cd0ce3f636b097b1be68fd793e16'/*321654*/);
