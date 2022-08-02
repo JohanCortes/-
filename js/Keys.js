@@ -1,10 +1,5 @@
 document.addEventListener("submit", (e) => {
-  e.preventDefault();
-  e.target.clave.value = CryptoJS.SHA256(e.target.key.value).toString();
-  e.target.fecha.value = new Date()
-    .toISOString()
-    .replace("T", " ")
-    .replace("Z", "");
+  //e.preventDefault();
   e.target.user.value = document.getElementById("user").dataset.id;
   e.target.emails.value += document.getElementById("user").dataset.email;
   let data = new FormData(e.target);

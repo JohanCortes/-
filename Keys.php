@@ -28,10 +28,9 @@ if (isset($_POST)) {
 <body>
   <form action="NewKey.php" method="post">
     <div class="fila">
-      <label for="clave">Clave: </label>
-      <input type='text' name='key' id='key' pattern="\d*" maxlength="4" required>
-      <input type='hidden' name='fecha' id='fecha'>
-      <input type='hidden' name='user' id='user'>
+      <label for="key">Clave: </label>
+      <input type='text' name='key' id='key' pattern="\d*" maxlength="6" required>
+      <input type='hidden' name='user' id='user' value="<?php echo $_SESSION['idusuario']?>">
     </div>
     <div class="fila">
       <label for="hh">Duración: </label>
@@ -47,7 +46,7 @@ if (isset($_POST)) {
         <input type="text" name="email" id="email" style="width: 80%;">
         <input type="button" value="+" id='btn-add'>
         <input type="hidden" name="emails" id="emails">
-        <input type="hidden" name="clave" id="clave">
+        <!-- <input type="hidden" name="clave" id="clave"> -->
       </div>
     </div>
 
